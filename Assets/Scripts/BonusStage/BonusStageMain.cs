@@ -29,6 +29,8 @@ public class BonusStageMain : MonoBehaviour {
     public float minY;
     [HideInInspector]
     public float maxY;
+    //[HideInInspector]
+    public float streakVelocity;
 
     #endregion
 
@@ -36,8 +38,12 @@ public class BonusStageMain : MonoBehaviour {
 
     private BonusStates bonusStates;
 
+    private AudioSource audioSource;
+
     private float timeElapsed;
     private float timeToSpawn;
+    private float counter;
+    
 
     #endregion
 
@@ -49,7 +55,10 @@ public class BonusStageMain : MonoBehaviour {
     void Start () {
 
         //Initialize variables
+        audioSource = GetComponent<AudioSource>();
         bonusStates = BonusStates.PLAYING;
+        counter = 0f;
+        streakVelocity = 0f;
         timeElapsed = 0f;
         timeToSpawn = 0f;
         setBoundsXY();
@@ -66,7 +75,7 @@ public class BonusStageMain : MonoBehaviour {
                 break;
             case BonusStates.PLAYING:
                 timeToSpawn += Time.deltaTime;
-
+                PitchMusic();
                 if(timeToSpawn >= Random.Range(1,3))
                 {
                     ActiveRandomNote();
@@ -85,6 +94,33 @@ public class BonusStageMain : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void PitchMusic()
+    {
+        counter += Time.deltaTime;
+        if (streakVelocity > 0f)
+            streakVelocity -= 0.01f;
+        if (streakVelocity > 0f)
+        {
+            if (counter >= 0.3f && audioSource.pitch < 1)
+            {
+                audioSource.pitch += 0.1f;
+                counter = 0f;
+            }
+        }
+        else if (streakVelocity <= 0f)
+        {
+            if (counter >= 0.3f && audioSource.pitch > 0)
+            {
+                audioSource.pitch -= 0.1f;
+                counter = 0f;
+            }
+        }
+        if (audioSource.pitch <= 0f)
+        {
+            audioSource.pitch = 0f;
         }
     }
 

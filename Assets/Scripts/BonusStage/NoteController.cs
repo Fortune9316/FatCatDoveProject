@@ -52,20 +52,13 @@ public class NoteController : MonoBehaviour {
                 print("moving");
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    mousePos.Scale(new Vector3(1, 1, 0));
 
-                    //if(Physics.Raycast(ray, out raycasthit))
-                    //{
-                    //    if (raycasthit.collider.gameObject.tag == "note")
-                    //    {
-                    //        noteStates = NoteStates.DIE;
-                    //    }
-                    //}
-
-                    print("click");
-
-                    if(Vector3.Distance(transform.position,Camera.main.ScreenToWorldPoint(Input.mousePosition)) <= 0.2f)
+                    if(Vector3.Distance(transform.position, mousePos) <= 0.5f)
                     {
+                        if(BonusStageMain.instance.streakVelocity<1.5f)
+                        BonusStageMain.instance.streakVelocity += 0.8f;
                         noteStates = NoteStates.DIE;
                     }
                 }
