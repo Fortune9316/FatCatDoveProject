@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BonusStage\BonusStageMain.cs" />
+    <Compile Include="Assets\Scripts\BonusStage\DoveController.cs" />
     <Compile Include="Assets\Scripts\BonusStage\NoteController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

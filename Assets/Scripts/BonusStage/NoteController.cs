@@ -34,7 +34,7 @@ public class NoteController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         noteStates = NoteStates.BORN;
-        speed = 0.5f;
+        speed = 2f;
 	}
 	
 	// Update is called once per frame
@@ -57,6 +57,7 @@ public class NoteController : MonoBehaviour {
 
                     if(Vector3.Distance(transform.position, mousePos) <= 0.5f)
                     {
+                        BonusStageMain.instance.ActiveParticle(transform.position);
                         if(BonusStageMain.instance.streakVelocity<1.5f)
                         BonusStageMain.instance.streakVelocity += 0.8f;
                         noteStates = NoteStates.DIE;

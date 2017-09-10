@@ -19,6 +19,12 @@ public class BonusStageMain : MonoBehaviour {
     [Header("Notes")]
     public List<GameObject> notes;
 
+    [Header("Doves")]
+    public List<GameObject> doves;
+
+    [Header("Star Particles")]
+    public List<ParticleSystem> particlesStars;
+
     public Transform spawnPoint;
 
     [HideInInspector]
@@ -89,6 +95,11 @@ public class BonusStageMain : MonoBehaviour {
                         notes[i].GetComponent<NoteController>().UpdateNote();
                     }
                 }
+
+                foreach (GameObject dove in doves)
+                {
+                    dove.GetComponent<DoveController>().UpdateDove();
+                }
                 break;
             case BonusStates.GAMEOVER:
                 break;
@@ -130,11 +141,25 @@ public class BonusStageMain : MonoBehaviour {
         {
             if (!notes[i].activeInHierarchy)
             {                
-                notes[i].GetComponent<NoteController>().spawnPoint = spawnPoint.position;
+                notes[i].GetComponent<NoteController>().spawnPoint = doves[Random.Range(0,doves.Count)].transform.position;
                 Vector3 dirAux = new Vector3(Random.Range(minX, maxX), Random.Range(2, maxY), 0f);
                 dirAux = Vector3.Normalize(dirAux);
                 notes[i].GetComponent<NoteController>().dir = dirAux - spawnPoint.position;
                 notes[i].SetActive(true);
+                break;
+            }
+        }
+    }
+
+    public void ActiveParticle(Vector3 spawnPoint)
+    {
+        for (int i = 0; i < particlesStars.Count; i++)
+        {
+            if (!particlesStars[i].isEmitting)
+            {
+                particlesStars[i].gameObject.SetActive(true);
+                particlesStars[i].transform.position = new Vector3(spawnPoint.x,spawnPoint.y,particlesStars[i].transform.position.z);
+                particlesStars[i].Play();
                 break;
             }
         }
