@@ -81,9 +81,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Point.cs" />
+    <Compile Include="Assets\Scripts\BonusStage\BonusStageMain.cs" />
+    <Compile Include="Assets\Scripts\BonusStage\DoveController.cs" />
+    <Compile Include="Assets\Scripts\BonusStage\NoteController.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Fading.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\Pause\PausedGame.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement\PlayerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement\Point.cs" />
+    <Compile Include="Assets\Scripts\PostBehaviour.cs" />
+    <Compile Include="Assets\Scripts\ScenaryMinimap\Finish.cs" />
+    <Compile Include="Assets\Scripts\ScenaryMinimap\Translate.cs" />
+    <Compile Include="Assets\Scripts\ScenaryMovement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
